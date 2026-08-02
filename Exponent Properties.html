@@ -1,0 +1,1292 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exponent Properties — College Algebra</title>
+
+<!-- KaTeX for LaTeX rendering -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+<style>
+/* ── UWG Brand Tokens ── */
+:root {
+  --uwg-blue:       #0054A6;
+  --uwg-blue-dark:  #003d7a;
+  --uwg-blue-light: #d6e8f7;
+  --uwg-red:        #DA1F27;
+  --uwg-red-dark:   #a8151b;
+  --uwg-red-light:  #fde8e9;
+  --gray-100: #f4f6f9;
+  --gray-200: #e2e8f0;
+  --gray-400: #94a3b8;
+  --gray-700: #334155;
+  --gray-900: #0f172a;
+  --white:    #ffffff;
+
+  /* Accessible contrast pairs (verified ≥4.5:1) */
+  --on-blue: #ffffff;
+  --on-red:  #ffffff;
+  --on-light:#1a2535;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--gray-100);
+  color: var(--gray-900);
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+/* ── Page Header ── */
+.page-header {
+  background: var(--uwg-blue);
+  color: var(--on-blue);
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.page-header .subtitle {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  opacity: 0.88;
+}
+
+/* ── Progress bar ── */
+.progress-bar-wrap {
+  background: var(--uwg-blue-dark);
+  height: 6px;
+}
+.progress-bar-fill {
+  background: var(--uwg-red);
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+/* ── Table of Contents ── */
+.toc {
+  background: var(--white);
+  border-left: 5px solid var(--uwg-red);
+  margin: 1.5rem auto;
+  max-width: 860px;
+  padding: 1.2rem 1.5rem;
+  border-radius: 0 6px 6px 0;
+}
+.toc h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--uwg-red); margin-bottom: 0.75rem; }
+.toc ol { padding-left: 1.2rem; }
+.toc li { margin: 0.3rem 0; }
+.toc a { color: var(--uwg-blue); font-weight: 600; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* ── Main content wrapper ── */
+.content { max-width: 860px; margin: 0 auto; padding: 0 1rem 4rem; }
+
+/* ── Section card ── */
+.section-card {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  margin: 2rem 0;
+  overflow: hidden;
+}
+
+.section-card .card-header {
+  background: var(--uwg-blue);
+  color: var(--on-blue);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-card .card-header .rule-number {
+  background: var(--uwg-red);
+  color: var(--on-red);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.section-card .card-header h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.card-body { padding: 1.5rem; }
+
+/* ── Rule box ── */
+.rule-box {
+  background: var(--uwg-blue-light);
+  border-left: 4px solid var(--uwg-blue);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.05rem;
+  color: var(--on-light);
+}
+
+/* ── Intuition block ── */
+.intuition {
+  background: var(--gray-100);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+.intuition strong { color: var(--uwg-blue); }
+
+/* ── Example table ── */
+.example-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+.example-table th {
+  background: var(--uwg-blue);
+  color: var(--on-blue);
+  padding: 0.6rem 1rem;
+  text-align: left;
+}
+.example-table td {
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+.example-table tr:nth-child(even) td { background: var(--gray-100); }
+
+/* ── Interactive exercise label ── */
+.exercise-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--uwg-red);
+  margin-bottom: 0.5rem;
+}
+
+/* ── Multiple choice (inline exercises) ── */
+.mc-group { display: flex; flex-direction: column; gap: 0.45rem; margin: 0.6rem 0 0.9rem; }
+.mc-q { margin-bottom: 1.1rem; }
+.mc-q .mc-stem { font-size: 1rem; margin-bottom: 0.5rem; }
+.mc-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  border-radius: 7px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+  line-height: 1.4;
+}
+.mc-btn:hover:not(:disabled) { border-color: var(--uwg-blue); background: var(--uwg-blue-light); }
+.mc-btn .mc-letter {
+  background: var(--gray-200);
+  color: var(--gray-700);
+  font-weight: 700;
+  font-size: 0.78rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.mc-btn.selected { border-color: var(--uwg-blue); background: var(--uwg-blue-light); }
+.mc-btn.selected .mc-letter { background: var(--uwg-blue); color: var(--on-blue); }
+.mc-btn.correct { border-color: #28a745; background: #d4edda; }
+.mc-btn.correct .mc-letter { background: #28a745; color: #fff; }
+.mc-btn.incorrect { border-color: var(--uwg-red); background: var(--uwg-red-light); }
+.mc-btn.incorrect .mc-letter { background: var(--uwg-red); color: #fff; }
+.mc-btn:disabled { cursor: default; }
+.mc-feedback { font-size: 0.88rem; font-weight: 600; margin-top: 0.4rem; min-height: 1.2em; }
+.mc-feedback.ok { color: #1a7a37; }
+.mc-feedback.err { color: var(--uwg-red-dark); }
+
+/* ── Fill-in-the-blank ── */
+.fib-problem { margin-bottom: 1.2rem; }
+.fib-problem .problem-text { margin-bottom: 0.4rem; font-size: 1rem; }
+.fib-input-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.fib-input {
+  border: 2px solid var(--gray-400);
+  border-radius: 5px;
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  width: 80px;
+  text-align: center;
+  transition: border-color 0.2s;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.fib-input:focus { outline: none; border-color: var(--uwg-blue); box-shadow: 0 0 0 3px rgba(0,84,166,0.2); }
+.fib-input.correct { border-color: #28a745; background: #d4edda; }
+.fib-input.incorrect { border-color: var(--uwg-red); background: var(--uwg-red-light); }
+.fib-feedback { font-size: 0.88rem; font-weight: 600; }
+.fib-feedback.ok { color: #1a7a37; }
+.fib-feedback.err { color: var(--uwg-red-dark); }
+
+/* ── Step-by-step ── */
+.step-problem .problem-stem { font-size: 1rem; margin-bottom: 0.75rem; }
+.steps-list { list-style: none; counter-reset: step-counter; }
+.steps-list li {
+  counter-increment: step-counter;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+}
+.steps-list li::before {
+  content: counter(step-counter);
+  background: var(--uwg-blue);
+  color: var(--on-blue);
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.step-content { flex: 1; }
+.step-content .step-desc { font-size: 0.9rem; color: var(--gray-700); margin-bottom: 0.3rem; }
+.step-reveal {
+  background: var(--gray-100);
+  border-radius: 5px;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.step-answer { display: none; font-size: 1rem; }
+.step-answer.shown { display: inline; }
+.reveal-btn {
+  background: none;
+  border: 2px solid var(--uwg-blue);
+  color: var(--uwg-blue);
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.reveal-btn:hover { background: var(--uwg-blue); color: var(--on-blue); }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 5px;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--uwg-blue); color: var(--on-blue); }
+.btn-primary:hover { background: var(--uwg-blue-dark); }
+.btn-secondary { background: var(--uwg-red); color: var(--on-red); }
+.btn-secondary:hover { background: var(--uwg-red-dark); }
+.btn-ghost { background: var(--gray-200); color: var(--gray-700); }
+.btn-ghost:hover { background: var(--gray-400); color: var(--white); }
+
+.btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+
+/* ── Score badge ── */
+.score-badge {
+  display: inline-block;
+  background: var(--uwg-blue-light);
+  border: 2px solid var(--uwg-blue);
+  border-radius: 20px;
+  padding: 0.2rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--uwg-blue-dark);
+  margin-left: auto;
+}
+
+/* ── Multi-step practice section ── */
+.practice-header {
+  background: var(--uwg-red);
+  color: var(--on-red);
+  padding: 1rem 1.5rem;
+  border-radius: 10px 10px 0 0;
+}
+.practice-header h2 { font-size: 1.2rem; font-weight: 700; }
+.practice-header p { font-size: 0.9rem; opacity: 0.9; margin-top: 0.2rem; }
+
+.practice-card {
+  background: var(--white);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  overflow: hidden;
+}
+
+.practice-problem {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+.practice-problem:last-child { border-bottom: none; }
+
+.problem-number {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--gray-400);
+  margin-bottom: 0.3rem;
+}
+.difficulty {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  border-radius: 10px;
+  margin-left: 0.5rem;
+}
+.diff-easy { background: #d4edda; color: #1a7a37; }
+.diff-medium { background: #fff3cd; color: #856404; }
+.diff-hard { background: var(--uwg-red-light); color: var(--uwg-red-dark); }
+
+.problem-expr { font-size: 1.1rem; margin: 0.5rem 0 0.75rem; }
+
+.mc-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+.mc-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.85rem;
+  border: 2px solid var(--gray-200);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  font-size: 0.95rem;
+}
+.mc-option:hover { border-color: var(--uwg-blue); background: var(--uwg-blue-light); }
+.mc-option input[type="radio"] { accent-color: var(--uwg-blue); width: 1rem; height: 1rem; flex-shrink: 0; }
+.mc-option.selected { border-color: var(--uwg-blue); background: var(--uwg-blue-light); }
+.mc-option.correct { border-color: #28a745; background: #d4edda; }
+.mc-option.incorrect { border-color: var(--uwg-red); background: var(--uwg-red-light); }
+
+.hint-box {
+  background: #fffbea;
+  border-left: 4px solid #d4a017;
+  border-radius: 4px;
+  padding: 0.7rem 1rem;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  display: none;
+}
+.hint-box.shown { display: block; }
+
+.answer-reveal {
+  background: var(--gray-100);
+  border-radius: 5px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+.answer-reveal.shown { display: block; }
+.answer-reveal .answer-label { font-size: 0.8rem; font-weight: 700; color: var(--gray-400); margin-bottom: 0.2rem; }
+
+.solution-steps {
+  margin-top: 0.75rem;
+  display: none;
+}
+.solution-steps.shown { display: block; }
+.solution-steps ol { padding-left: 1.3rem; }
+.solution-steps li { margin: 0.35rem 0; font-size: 0.92rem; }
+.solution-steps .rule-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--uwg-blue-light);
+  color: var(--uwg-blue-dark);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  margin-left: 0.3rem;
+}
+
+/* ── Final score panel ── */
+.final-score {
+  background: var(--uwg-blue);
+  color: var(--on-blue);
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  display: none;
+}
+.final-score.shown { display: block; }
+.final-score h2 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.final-score .score-number { font-size: 3rem; font-weight: 700; line-height: 1; }
+.final-score .score-label { opacity: 0.85; margin-top: 0.3rem; }
+.final-score .feedback-text { margin-top: 1rem; font-size: 1rem; opacity: 0.9; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .fib-input { width: 65px; }
+  .btn-row { flex-direction: column; }
+}
+
+/* ── Accessibility ── */
+:focus-visible { outline: 3px solid var(--uwg-red); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Exponent Properties</h1>
+  <p class="subtitle">College Algebra &nbsp;·&nbsp; Interactive Review</p>
+</header>
+<div class="progress-bar-wrap" role="progressbar" aria-label="Page progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar-fill" id="progressBar"></div>
+</div>
+
+<nav class="toc" aria-label="Table of contents">
+  <h2>On This Page</h2>
+  <ol>
+    <li><a href="#product-rule">Product Rule</a></li>
+    <li><a href="#quotient-rule">Quotient Rule</a></li>
+    <li><a href="#power-rule">Power Rule</a></li>
+    <li><a href="#zero-exponent">Zero Exponent</a></li>
+    <li><a href="#negative-exponents">Negative Exponents</a></li>
+    <li><a href="#fractional-exponents">Fractional Exponents</a></li>
+    <li><a href="#multi-step">Multi-Step Practice</a></li>
+  </ol>
+</nav>
+
+<main class="content">
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 1. PRODUCT RULE -->
+<!-- ════════════════════════════════════════════ -->
+<section class="section-card" id="product-rule">
+  <div class="card-header">
+    <div class="rule-number" aria-hidden="true">1</div>
+    <h2>Product Rule</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="rule-box" id="rule-product">
+      \( a^m \cdot a^n = a^{m+n} \)
+    </div>
+
+    <div class="intuition">
+      <strong>Intuition:</strong> An exponent is just a count of how many times you multiply by the base. So \( a^3 \cdot a^2 \) means three copies times two copies — five copies total: \( a^5 \).
+    </div>
+
+    <table class="example-table">
+      <thead><tr><th>Expression</th><th>Expanded</th><th>Simplified</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>\( x^3 \cdot x^4 \)</td>
+          <td>\( (x \cdot x \cdot x)(x \cdot x \cdot x \cdot x) \)</td>
+          <td>\( x^7 \)</td>
+        </tr>
+        <tr>
+          <td>\( 2^3 \cdot 2^5 \)</td>
+          <td>\( 8 \cdot 32 \)</td>
+          <td>\( 2^8 = 256 \)</td>
+        </tr>
+        <tr>
+          <td>\( y^{-2} \cdot y^6 \)</td>
+          <td>add exponents: \(-2+6\)</td>
+          <td>\( y^4 \)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Multiple choice -->
+    <div class="exercise-label">Exercise — Multiple Choice</div>
+
+    <div class="mc-q" id="mc-prod-1">
+      <div class="mc-stem">Simplify: \( x^2 \cdot x^5 \)</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-1',false)"><span class="mc-letter">A</span>\( x^{10} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-1',true)"><span class="mc-letter">B</span>\( x^{7} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-1',false)"><span class="mc-letter">C</span>\( x^{3} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-1',false)"><span class="mc-letter">D</span>\( 2x^{7} \)</button>
+      </div>
+      <div class="mc-feedback" id="mc-prod-1-fb"></div>
+    </div>
+
+    <div class="mc-q" id="mc-prod-2">
+      <div class="mc-stem">Simplify: \( z \cdot z^6 \)</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-2',false)"><span class="mc-letter">A</span>\( z^{6} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-2',false)"><span class="mc-letter">B</span>\( z^{5} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-2',true)"><span class="mc-letter">C</span>\( z^{7} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-2',false)"><span class="mc-letter">D</span>\( 6z \)</button>
+      </div>
+      <div class="mc-feedback" id="mc-prod-2-fb"></div>
+    </div>
+
+    <div class="mc-q" id="mc-prod-3">
+      <div class="mc-stem">Simplify: \( b^3 \cdot b^{-1} \)</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-3',false)"><span class="mc-letter">A</span>\( b^{-3} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-3',true)"><span class="mc-letter">B</span>\( b^{2} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-3',false)"><span class="mc-letter">C</span>\( b^{4} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-prod-3',false)"><span class="mc-letter">D</span>\( 1 \)</button>
+      </div>
+      <div class="mc-feedback" id="mc-prod-3-fb"></div>
+    </div>
+
+    <!-- Fill-in-the-blank -->
+    <div class="exercise-label" style="margin-top:1.5rem;">Exercise — Fill in the Blank</div>
+    <div id="fib-product">
+      <div class="fib-problem">
+        <div class="problem-text">\( m^5 \cdot m^3 = m^{\,?\,} \)</div>
+        <div class="fib-input-row">
+          <label for="fib-p-1" class="sr-only">Exponent</label>
+          <input class="fib-input" id="fib-p-1" type="number" placeholder="?" data-answer="8" aria-label="Enter the missing exponent">
+          <span class="fib-feedback" id="fib-p-1-fb"></span>
+        </div>
+      </div>
+      <div class="fib-problem">
+        <div class="problem-text">\( 5^a \cdot 5^7 = 5^{11} \) &nbsp; Find \( a \).</div>
+        <div class="fib-input-row">
+          <label for="fib-p-2" class="sr-only">Value of a</label>
+          <input class="fib-input" id="fib-p-2" type="number" placeholder="a" data-answer="4" aria-label="Enter the value of a">
+          <span class="fib-feedback" id="fib-p-2-fb"></span>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkFIB('fib-product')">Check Answers</button>
+      <button class="btn btn-ghost" onclick="resetFIB('fib-product')">Reset</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 2. QUOTIENT RULE -->
+<!-- ════════════════════════════════════════════ -->
+<section class="section-card" id="quotient-rule">
+  <div class="card-header">
+    <div class="rule-number" aria-hidden="true">2</div>
+    <h2>Quotient Rule</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="rule-box">\( \dfrac{a^m}{a^n} = a^{m-n} \quad (a \neq 0) \)</div>
+
+    <div class="intuition">
+      <strong>Intuition:</strong> Division cancels factors. \( \dfrac{x^5}{x^2} = \dfrac{x \cdot x \cdot x \cdot \cancel{x} \cdot \cancel{x}}{\cancel{x} \cdot \cancel{x}} = x^3 \). You subtract because you're counting what's <em>left</em> after cancellation.
+    </div>
+
+    <table class="example-table">
+      <thead><tr><th>Expression</th><th>Step</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>\( \dfrac{y^8}{y^3} \)</td><td>\( 8-3 \)</td><td>\( y^5 \)</td></tr>
+        <tr><td>\( \dfrac{3^6}{3^6} \)</td><td>\( 6-6 \)</td><td>\( 3^0 = 1 \)</td></tr>
+        <tr><td>\( \dfrac{x^2}{x^5} \)</td><td>\( 2-5 \)</td><td>\( x^{-3} \)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="exercise-label">Exercise — Fill in the Blank</div>
+    <div id="fib-quotient">
+      <div class="fib-problem">
+        <div class="problem-text">\( \dfrac{w^9}{w^4} = w^{\,?\,} \)</div>
+        <div class="fib-input-row">
+          <label for="fib-q-1" class="sr-only">Exponent</label>
+          <input class="fib-input" id="fib-q-1" type="number" placeholder="?" data-answer="5" aria-label="Enter the missing exponent">
+          <span class="fib-feedback" id="fib-q-1-fb"></span>
+        </div>
+      </div>
+      <div class="fib-problem">
+        <div class="problem-text">\( \dfrac{t^3}{t^7} = t^{\,?\,} \) &nbsp; (negative answer ok)</div>
+        <div class="fib-input-row">
+          <label for="fib-q-2" class="sr-only">Exponent</label>
+          <input class="fib-input" id="fib-q-2" type="number" placeholder="?" data-answer="-4" aria-label="Enter the missing exponent">
+          <span class="fib-feedback" id="fib-q-2-fb"></span>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkFIB('fib-quotient')">Check Answers</button>
+      <button class="btn btn-ghost" onclick="resetFIB('fib-quotient')">Reset</button>
+    </div>
+
+    <!-- Step-by-step -->
+    <div class="exercise-label" style="margin-top:1.5rem;">Exercise — Step-by-Step</div>
+    <div class="step-problem">
+      <div class="problem-stem">Simplify: \( \dfrac{6x^5 y^3}{2x^2 y^7} \)</div>
+      <ol class="steps-list">
+        <li>
+          <div class="step-content">
+            <div class="step-desc">Divide the coefficients.</div>
+            <div class="step-reveal">
+              <button class="reveal-btn" onclick="revealStep(this)">Show</button>
+              <span class="step-answer">\( \dfrac{6}{2} = 3 \)</span>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <div class="step-desc">Apply the quotient rule to \( x \).</div>
+            <div class="step-reveal">
+              <button class="reveal-btn" onclick="revealStep(this)">Show</button>
+              <span class="step-answer">\( x^{5-2} = x^3 \)</span>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <div class="step-desc">Apply the quotient rule to \( y \).</div>
+            <div class="step-reveal">
+              <button class="reveal-btn" onclick="revealStep(this)">Show</button>
+              <span class="step-answer">\( y^{3-7} = y^{-4} \)</span>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <div class="step-desc">Write the final simplified answer.</div>
+            <div class="step-reveal">
+              <button class="reveal-btn" onclick="revealStep(this)">Show</button>
+              <span class="step-answer">\( \dfrac{3x^3}{y^4} \)</span>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 3. POWER RULE -->
+<!-- ════════════════════════════════════════════ -->
+<section class="section-card" id="power-rule">
+  <div class="card-header">
+    <div class="rule-number" aria-hidden="true">3</div>
+    <h2>Power Rule</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="rule-box">\( (a^m)^n = a^{m \cdot n} \qquad (ab)^n = a^n b^n \qquad \left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n} \)</div>
+
+    <div class="intuition">
+      <strong>Intuition:</strong> \( (x^3)^4 \) means you repeat the group \(x^3\) four times: \( x^3 \cdot x^3 \cdot x^3 \cdot x^3 \). Product rule says add the exponents four times — which is the same as multiplying: \( x^{3 \times 4} = x^{12} \).
+    </div>
+
+    <table class="example-table">
+      <thead><tr><th>Expression</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>\( (k^4)^3 \)</td><td>\( k^{12} \)</td></tr>
+        <tr><td>\( (2x^2)^3 \)</td><td>\( 8x^6 \)</td></tr>
+        <tr><td>\( \left(\dfrac{p}{q^2}\right)^4 \)</td><td>\( \dfrac{p^4}{q^8} \)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="exercise-label">Exercise — Fill in the Blank</div>
+    <div id="fib-power">
+      <div class="fib-problem">
+        <div class="problem-text">\( (n^3)^5 = n^{\,?\,} \)</div>
+        <div class="fib-input-row">
+          <label for="fib-pw-1" class="sr-only">Exponent</label>
+          <input class="fib-input" id="fib-pw-1" type="number" placeholder="?" data-answer="15" aria-label="Enter the missing exponent">
+          <span class="fib-feedback" id="fib-pw-1-fb"></span>
+        </div>
+      </div>
+      <div class="fib-problem">
+        <div class="problem-text">\( (3x^4)^2 \) — enter the coefficient</div>
+        <div class="fib-input-row">
+          <label for="fib-pw-2" class="sr-only">Coefficient</label>
+          <input class="fib-input" id="fib-pw-2" type="number" placeholder="coeff" data-answer="9" aria-label="Enter the coefficient">
+          <span class="fib-feedback" id="fib-pw-2-fb"></span>
+        </div>
+      </div>
+      <div class="fib-problem">
+        <div class="problem-text">\( (3x^4)^2 \) — enter the exponent on \(x\)</div>
+        <div class="fib-input-row">
+          <label for="fib-pw-3" class="sr-only">Exponent on x</label>
+          <input class="fib-input" id="fib-pw-3" type="number" placeholder="exp" data-answer="8" aria-label="Enter the exponent on x">
+          <span class="fib-feedback" id="fib-pw-3-fb"></span>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkFIB('fib-power')">Check Answers</button>
+      <button class="btn btn-ghost" onclick="resetFIB('fib-power')">Reset</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 4. ZERO EXPONENT -->
+<!-- ════════════════════════════════════════════ -->
+<section class="section-card" id="zero-exponent">
+  <div class="card-header">
+    <div class="rule-number" aria-hidden="true">4</div>
+    <h2>Zero Exponent</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="rule-box">\( a^0 = 1 \quad (a \neq 0) \)</div>
+
+    <div class="intuition">
+      <strong>Intuition via quotient rule:</strong> Any number divided by itself is 1. Using the quotient rule: \( \dfrac{a^n}{a^n} = a^{n-n} = a^0 \). But we also know \( \dfrac{a^n}{a^n} = 1 \). So \( a^0 = 1 \).
+    </div>
+
+    <!-- Multiple choice -->
+    <div class="exercise-label">Exercise — Multiple Choice</div>
+
+    <div class="mc-q" id="mc-zero-1">
+      <div class="mc-stem">Evaluate: \( 7^0 \)</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-1',false)"><span class="mc-letter">A</span>\( 0 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-1',false)"><span class="mc-letter">B</span>\( 7 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-1',true)"><span class="mc-letter">C</span>\( 1 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-1',false)"><span class="mc-letter">D</span>Undefined</button>
+      </div>
+      <div class="mc-feedback" id="mc-zero-1-fb"></div>
+    </div>
+
+    <div class="mc-q" id="mc-zero-2">
+      <div class="mc-stem">Which of the following equals 1?</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-2',false)"><span class="mc-letter">A</span>\( 0^0 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-2',true)"><span class="mc-letter">B</span>\( (-5)^0 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-2',false)"><span class="mc-letter">C</span>\( 0^5 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-2',false)"><span class="mc-letter">D</span>\( 5^{-1} \)</button>
+      </div>
+      <div class="mc-feedback" id="mc-zero-2-fb"></div>
+    </div>
+
+    <div class="mc-q" id="mc-zero-3">
+      <div class="mc-stem">Simplify: \( (xyz)^0 \) where \( x, y, z \neq 0 \)</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-3',false)"><span class="mc-letter">A</span>\( xyz \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-3',false)"><span class="mc-letter">B</span>\( 0 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-3',true)"><span class="mc-letter">C</span>\( 1 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-zero-3',false)"><span class="mc-letter">D</span>\( x^0 y^0 z \)</button>
+      </div>
+      <div class="mc-feedback" id="mc-zero-3-fb"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 5. NEGATIVE EXPONENTS -->
+<!-- ════════════════════════════════════════════ -->
+<section class="section-card" id="negative-exponents">
+  <div class="card-header">
+    <div class="rule-number" aria-hidden="true">5</div>
+    <h2>Negative Exponents</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="rule-box">\( a^{-n} = \dfrac{1}{a^n} \qquad \dfrac{1}{a^{-n}} = a^n \quad (a \neq 0) \)</div>
+
+    <div class="intuition">
+      <strong>Intuition:</strong> The quotient rule gives us \( \dfrac{a^2}{a^5} = a^{-3} \). But expanding shows \( \dfrac{a \cdot a}{a \cdot a \cdot a \cdot a \cdot a} = \dfrac{1}{a^3} \). Negative exponents mean <em>reciprocal</em> — they live in the denominator.
+    </div>
+
+    <table class="example-table">
+      <thead><tr><th>Negative form</th><th>Positive form</th></tr></thead>
+      <tbody>
+        <tr><td>\( x^{-3} \)</td><td>\( \dfrac{1}{x^3} \)</td></tr>
+        <tr><td>\( \dfrac{1}{y^{-4}} \)</td><td>\( y^4 \)</td></tr>
+        <tr><td>\( 2^{-3} \)</td><td>\( \dfrac{1}{8} \)</td></tr>
+        <tr><td>\( \dfrac{a^{-2}}{b^{-5}} \)</td><td>\( \dfrac{b^5}{a^2} \)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="exercise-label">Exercise — Step-by-Step</div>
+    <div class="step-problem">
+      <div class="problem-stem">Rewrite \( \dfrac{x^{-3} y^2}{z^{-1}} \) with only positive exponents.</div>
+      <ol class="steps-list">
+        <li>
+          <div class="step-content">
+            <div class="step-desc">Move \( x^{-3} \) to the denominator.</div>
+            <div class="step-reveal">
+              <button class="reveal-btn" onclick="revealStep(this)">Show</button>
+              <span class="step-answer">\( \dfrac{y^2}{x^3 \cdot z^{-1}} \)</span>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <div class="step-desc">Move \( z^{-1} \) from denominator to numerator.</div>
+            <div class="step-reveal">
+              <button class="reveal-btn" onclick="revealStep(this)">Show</button>
+              <span class="step-answer">\( \dfrac{y^2 \cdot z}{x^3} \)</span>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <div class="step-desc">Write the final answer.</div>
+            <div class="step-reveal">
+              <button class="reveal-btn" onclick="revealStep(this)">Show</button>
+              <span class="step-answer">\( \dfrac{y^2 z}{x^3} \)</span>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="exercise-label" style="margin-top:1rem;">Exercise — Fill in the Blank</div>
+    <div id="fib-negative">
+      <div class="fib-problem">
+        <div class="problem-text">\( 4^{-2} = \dfrac{1}{?} \)</div>
+        <div class="fib-input-row">
+          <label for="fib-n-1" class="sr-only">Denominator value</label>
+          <input class="fib-input" id="fib-n-1" type="number" placeholder="?" data-answer="16" aria-label="Enter the denominator">
+          <span class="fib-feedback" id="fib-n-1-fb"></span>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkFIB('fib-negative')">Check Answers</button>
+      <button class="btn btn-ghost" onclick="resetFIB('fib-negative')">Reset</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 6. FRACTIONAL EXPONENTS -->
+<!-- ════════════════════════════════════════════ -->
+<section class="section-card" id="fractional-exponents">
+  <div class="card-header">
+    <div class="rule-number" aria-hidden="true">6</div>
+    <h2>Fractional Exponents</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="rule-box">\( a^{1/n} = \sqrt[n]{a} \qquad a^{m/n} = \sqrt[n]{a^m} = \left(\sqrt[n]{a}\right)^m \)</div>
+
+    <div class="intuition">
+      <strong>Intuition:</strong> If \( (a^{1/2})^2 = a^1 = a \), then \( a^{1/2} \) must be the number that, when squared, gives \(a\). That's exactly \( \sqrt{a} \). The denominator of the fractional exponent is the index of the radical.
+    </div>
+
+    <table class="example-table">
+      <thead><tr><th>Fractional form</th><th>Radical form</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>\( 9^{1/2} \)</td><td>\( \sqrt{9} \)</td><td>\( 3 \)</td></tr>
+        <tr><td>\( 8^{1/3} \)</td><td>\( \sqrt[3]{8} \)</td><td>\( 2 \)</td></tr>
+        <tr><td>\( 16^{3/4} \)</td><td>\( \left(\sqrt[4]{16}\right)^3 \)</td><td>\( 8 \)</td></tr>
+        <tr><td>\( x^{2/5} \)</td><td>\( \sqrt[5]{x^2} \)</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Multiple choice -->
+    <div class="exercise-label">Exercise — Multiple Choice</div>
+
+    <div class="mc-q" id="mc-frac-1">
+      <div class="mc-stem">Evaluate: \( 27^{1/3} \)</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-1',false)"><span class="mc-letter">A</span>\( 9 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-1',true)"><span class="mc-letter">B</span>\( 3 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-1',false)"><span class="mc-letter">C</span>\( 81 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-1',false)"><span class="mc-letter">D</span>\( \dfrac{1}{3} \)</button>
+      </div>
+      <div class="mc-feedback" id="mc-frac-1-fb"></div>
+    </div>
+
+    <div class="mc-q" id="mc-frac-2">
+      <div class="mc-stem">Which radical form equals \( 4^{3/2} \)?</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-2',false)"><span class="mc-letter">A</span>\( \sqrt[3]{4} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-2',false)"><span class="mc-letter">B</span>\( \sqrt{4^2} \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-2',true)"><span class="mc-letter">C</span>\( \left(\sqrt{4}\right)^3 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-2',false)"><span class="mc-letter">D</span>\( \sqrt[4]{3} \)</button>
+      </div>
+      <div class="mc-feedback" id="mc-frac-2-fb"></div>
+    </div>
+
+    <div class="mc-q" id="mc-frac-3">
+      <div class="mc-stem">Evaluate: \( 32^{2/5} \)</div>
+      <div class="mc-group">
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-3',false)"><span class="mc-letter">A</span>\( 8 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-3',false)"><span class="mc-letter">B</span>\( 16 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-3',true)"><span class="mc-letter">C</span>\( 4 \)</button>
+        <button class="mc-btn" onclick="pickMC(this,'mc-frac-3',false)"><span class="mc-letter">D</span>\( 2 \)</button>
+      </div>
+      <div class="mc-feedback" id="mc-frac-3-fb"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 7. MULTI-STEP PRACTICE -->
+<!-- ════════════════════════════════════════════ -->
+<section id="multi-step">
+  <div class="practice-header">
+    <h2>Multi-Step Practice Problems</h2>
+    <p>Each problem requires at least two exponent properties. Work through them, use the hints if needed.</p>
+  </div>
+  <div class="practice-card">
+
+    <!-- Problem 1 -->
+    <div class="practice-problem" id="pp1">
+      <div class="problem-number">Problem 1 <span class="difficulty diff-easy">Easy</span></div>
+      <div class="problem-expr">\( x^3 \cdot x^{-5} \cdot x^4 \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h1')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s1')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h1">Apply the product rule: add all three exponents together.</div>
+      <div class="solution-steps" id="s1">
+        <ol>
+          <li>Product rule: \( 3 + (-5) + 4 = 2 \)</li>
+          <li>Answer: \( x^2 \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 2 -->
+    <div class="practice-problem" id="pp2">
+      <div class="problem-number">Problem 2 <span class="difficulty diff-easy">Easy</span></div>
+      <div class="problem-expr">\( \dfrac{(2a^3)^2}{a^4} \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h2')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s2')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h2">Apply the power rule to the numerator first, then the quotient rule.</div>
+      <div class="solution-steps" id="s2">
+        <ol>
+          <li>Power rule on numerator: \( (2a^3)^2 = 4a^6 \)</li>
+          <li>Quotient rule: \( \dfrac{4a^6}{a^4} = 4a^{6-4} = 4a^2 \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 3 -->
+    <div class="practice-problem" id="pp3">
+      <div class="problem-number">Problem 3 <span class="difficulty diff-medium">Medium</span></div>
+      <div class="problem-expr">\( \dfrac{x^{-2} y^3}{x^4 y^{-1}} \) &nbsp; (positive exponents only)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h3')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s3')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h3">Apply the quotient rule to each variable separately, then rewrite negatives as reciprocals.</div>
+      <div class="solution-steps" id="s3">
+        <ol>
+          <li>Quotient on \(x\): \( x^{-2-4} = x^{-6} \)</li>
+          <li>Quotient on \(y\): \( y^{3-(-1)} = y^4 \)</li>
+          <li>Negative exponent: \( x^{-6} = \dfrac{1}{x^6} \)</li>
+          <li>Answer: \( \dfrac{y^4}{x^6} \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 4 -->
+    <div class="practice-problem" id="pp4">
+      <div class="problem-number">Problem 4 <span class="difficulty diff-medium">Medium</span></div>
+      <div class="problem-expr">\( \left(\dfrac{a^2 b^{-1}}{a^{-3}}\right)^2 \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h4')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s4')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h4">Simplify inside the parentheses first using the quotient rule, then apply the power rule.</div>
+      <div class="solution-steps" id="s4">
+        <ol>
+          <li>Quotient on \(a\) inside: \( a^{2-(-3)} = a^5 \), so inside = \( a^5 b^{-1} \)</li>
+          <li>Power rule: \( (a^5 b^{-1})^2 = a^{10} b^{-2} \)</li>
+          <li>Answer: \( \dfrac{a^{10}}{b^2} \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 5 -->
+    <div class="practice-problem" id="pp5">
+      <div class="problem-number">Problem 5 <span class="difficulty diff-medium">Medium</span></div>
+      <div class="problem-expr">\( \dfrac{(3x^2 y)^3}{9x^4 y^0} \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h5')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s5')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h5">Remember \( y^0 = 1 \). Expand the numerator using the power rule first.</div>
+      <div class="solution-steps" id="s5">
+        <ol>
+          <li>Power rule: \( (3x^2 y)^3 = 27 x^6 y^3 \)</li>
+          <li>Zero exponent: \( y^0 = 1 \), so denominator \( = 9x^4 \)</li>
+          <li>Divide coefficients: \( \dfrac{27}{9} = 3 \)</li>
+          <li>Quotient rule on \(x\): \( x^{6-4} = x^2 \)</li>
+          <li>Answer: \( 3x^2 y^3 \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 6 -->
+    <div class="practice-problem" id="pp6">
+      <div class="problem-number">Problem 6 <span class="difficulty diff-medium">Medium</span></div>
+      <div class="problem-expr">\( \left(16x^8\right)^{1/2} \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h6')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s6')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h6">Distribute the \( \frac{1}{2} \) exponent to each factor inside using the power rule for products.</div>
+      <div class="solution-steps" id="s6">
+        <ol>
+          <li>Distribute: \( 16^{1/2} \cdot (x^8)^{1/2} \)</li>
+          <li>\( 16^{1/2} = \sqrt{16} = 4 \)</li>
+          <li>\( (x^8)^{1/2} = x^{8 \cdot \frac{1}{2}} = x^4 \)</li>
+          <li>Answer: \( 4x^4 \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 7 -->
+    <div class="practice-problem" id="pp7">
+      <div class="problem-number">Problem 7 <span class="difficulty diff-hard">Hard</span></div>
+      <div class="problem-expr">\( \dfrac{(2x^{-1} y^3)^2 \cdot x^5}{4 y^{-2}} \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h7')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s7')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h7">Expand the squared factor first, then combine like bases across numerator and denominator.</div>
+      <div class="solution-steps" id="s7">
+        <ol>
+          <li>Power rule: \( (2x^{-1}y^3)^2 = 4x^{-2}y^6 \)</li>
+          <li>Numerator: \( 4x^{-2}y^6 \cdot x^5 = 4x^{3}y^6 \)</li>
+          <li>Full fraction: \( \dfrac{4x^3 y^6}{4y^{-2}} \)</li>
+          <li>Coefficients cancel: \( \dfrac{4}{4} = 1 \)</li>
+          <li>Quotient on \(y\): \( y^{6-(-2)} = y^8 \)</li>
+          <li>Answer: \( x^3 y^8 \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 8 -->
+    <div class="practice-problem" id="pp8">
+      <div class="problem-number">Problem 8 <span class="difficulty diff-hard">Hard</span></div>
+      <div class="problem-expr">\( \left(\dfrac{x^{3/2} y^{-1}}{x^{-1/2} y^{1/2}}\right)^4 \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h8')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s8')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h8">Simplify the fraction inside first using the quotient rule (subtract exponents), then raise to the 4th power.</div>
+      <div class="solution-steps" id="s8">
+        <ol>
+          <li>Quotient on \(x\) inside: \( x^{3/2 - (-1/2)} = x^{2} \)</li>
+          <li>Quotient on \(y\) inside: \( y^{-1 - 1/2} = y^{-3/2} \)</li>
+          <li>Inside simplified: \( x^2 y^{-3/2} \)</li>
+          <li>Power rule: \( (x^2 y^{-3/2})^4 = x^8 y^{-6} \)</li>
+          <li>Negative exponent: \( y^{-6} = \dfrac{1}{y^6} \)</li>
+          <li>Answer: \( \dfrac{x^8}{y^6} \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 9 -->
+    <div class="practice-problem" id="pp9">
+      <div class="problem-number">Problem 9 <span class="difficulty diff-hard">Hard</span></div>
+      <div class="problem-expr">\( \dfrac{(a^2 b^3)^{-2} \cdot a^5 b}{a^{-3} b^0} \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h9')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s9')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h9">Expand the \((\cdot)^{-2}\) first, then combine. Don't forget \( b^0 = 1 \).</div>
+      <div class="solution-steps" id="s9">
+        <ol>
+          <li>Power rule: \( (a^2 b^3)^{-2} = a^{-4} b^{-6} \)</li>
+          <li>Numerator: \( a^{-4}b^{-6} \cdot a^5 b = a^1 b^{-5} \)</li>
+          <li>Denominator: \( a^{-3} \cdot 1 = a^{-3} \) (since \( b^0=1 \))</li>
+          <li>Quotient on \(a\): \( a^{1-(-3)} = a^4 \)</li>
+          <li>Negative exponent: \( b^{-5} = \dfrac{1}{b^5} \)</li>
+          <li>Answer: \( \dfrac{a^4}{b^5} \)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Problem 10 -->
+    <div class="practice-problem" id="pp10">
+      <div class="problem-number">Problem 10 <span class="difficulty diff-hard">Hard</span></div>
+      <div class="problem-expr">\( \left(\dfrac{8 x^{3/2}}{x^{-1/2}}\right)^{2/3} \)</div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleHint('h10')">💡 Hint</button>
+        <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="toggleSolution('s10')">Show Solution</button>
+      </div>
+      <div class="hint-box" id="h10">Simplify the fraction inside first (quotient rule on \(x\)), then apply the fractional exponent to both the coefficient and the variable.</div>
+      <div class="solution-steps" id="s10">
+        <ol>
+          <li>Quotient on \(x\): \( x^{3/2-(-1/2)} = x^2 \)</li>
+          <li>Inside: \( 8x^2 \)</li>
+          <li>Apply \( (\cdot)^{2/3} \): \( 8^{2/3} \cdot (x^2)^{2/3} \)</li>
+          <li>\( 8^{2/3} = (\sqrt[3]{8})^2 = 2^2 = 4 \)</li>
+          <li>\( (x^2)^{2/3} = x^{4/3} \)</li>
+          <li>Answer: \( 4x^{4/3} \)</li>
+        </ol>
+      </div>
+    </div>
+
+  </div><!-- end .practice-card -->
+</section>
+
+</main>
+
+<!-- KaTeX auto-render -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: "\\(", right: "\\)", display: false},
+      {left: "\\[", right: "\\]", display: true}
+    ]
+  });
+  updateProgress();
+});
+
+/* ──────────────────────────────────────────────
+   PROGRESS BAR
+────────────────────────────────────────────── */
+function updateProgress() {
+  const sections = document.querySelectorAll('.section-card, #multi-step');
+  const total = sections.length;
+  let visible = 0;
+  const scroll = window.scrollY + window.innerHeight;
+  sections.forEach(s => {
+    if (s.offsetTop < scroll) visible++;
+  });
+  const pct = Math.min(100, Math.round((visible / total) * 100));
+  const bar = document.getElementById('progressBar');
+  bar.style.width = pct + '%';
+  bar.closest('[role=progressbar]').setAttribute('aria-valuenow', pct);
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+/* ──────────────────────────────────────────────
+   STEP-BY-STEP REVEAL
+────────────────────────────────────────────── */
+function revealStep(btn) {
+  const ans = btn.nextElementSibling;
+  ans.classList.add('shown');
+  btn.textContent = '✓';
+  btn.disabled = true;
+  renderMathInElement(ans, {
+    delimiters: [{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}]
+  });
+}
+
+/* ──────────────────────────────────────────────
+   HINTS & SOLUTIONS (practice section)
+────────────────────────────────────────────── */
+function toggleHint(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('shown');
+}
+function toggleSolution(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('shown');
+  renderMathInElement(el, {
+    delimiters: [{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}]
+  });
+}
+
+/* ──────────────────────────────────────────────
+   FILL-IN-THE-BLANK
+────────────────────────────────────────────── */
+function checkFIB(containerId) {
+  const container = document.getElementById(containerId);
+  const inputs = container.querySelectorAll('.fib-input');
+  inputs.forEach(inp => {
+    const fb = document.getElementById(inp.id + '-fb');
+    const val = parseFloat(inp.value);
+    const ans = parseFloat(inp.dataset.answer);
+    inp.classList.remove('correct','incorrect');
+    if (isNaN(val)) {
+      fb.textContent = '';
+      return;
+    }
+    if (val === ans) {
+      inp.classList.add('correct');
+      fb.textContent = '✓ Correct!';
+      fb.className = 'fib-feedback ok';
+    } else {
+      inp.classList.add('incorrect');
+      fb.textContent = `✗ Try again (hint: answer is ${ans})`;
+      fb.className = 'fib-feedback err';
+    }
+  });
+}
+function resetFIB(containerId) {
+  const container = document.getElementById(containerId);
+  container.querySelectorAll('.fib-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct','incorrect');
+  });
+  container.querySelectorAll('.fib-feedback').forEach(fb => {
+    fb.textContent = '';
+    fb.className = 'fib-feedback';
+  });
+}
+
+/* ──────────────────────────────────────────────
+   MULTIPLE CHOICE (inline exercises)
+────────────────────────────────────────────── */
+function pickMC(btn, groupId, isCorrect) {
+  const group = document.getElementById(groupId);
+  // Prevent re-answering
+  if (group.querySelector('.mc-btn.correct, .mc-btn.incorrect')) return;
+
+  // Mark all buttons in this group as disabled
+  group.querySelectorAll('.mc-btn').forEach(b => {
+    b.disabled = true;
+    b.classList.remove('selected');
+  });
+
+  const fb = document.getElementById(groupId + '-fb');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    fb.textContent = '✓ Correct!';
+    fb.className = 'mc-feedback ok';
+  } else {
+    btn.classList.add('incorrect');
+    fb.textContent = '✗ Not quite — try reviewing the rule above.';
+    fb.className = 'mc-feedback err';
+    // Highlight the correct button
+    group.querySelectorAll('.mc-btn').forEach(b => {
+      const ev = b.getAttribute('onclick') || '';
+      if (ev.includes(',true)')) b.classList.add('correct');
+    });
+  }
+  renderMathInElement(group, {
+    delimiters: [{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}]
+  });
+}
+</script>
+</body>
+</html>
